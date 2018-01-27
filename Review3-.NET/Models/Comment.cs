@@ -10,8 +10,12 @@ namespace Review3_.NET.Models
         public Comment(){}
         [Key]
         public int Id { get; set; }
-        public User Author { get; set; }
         public string Body { get; private set; }
+        [ForeignKey("Post")]
         public int PostId { get; set; }
+        public virtual Post Post { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

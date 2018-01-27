@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Review3_.NET.ViewModels;
 using Review3_.NET.Models;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Review3_.NET.Controllers
 {
@@ -23,9 +22,24 @@ namespace Review3_.NET.Controllers
             _signInManager = signInManager;
             _db = db;
         }
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            var user = new User { UserName = model.Email };
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            { return RedirectToAction("Index"); }
+            else { return View(); }
         }
     }
 }

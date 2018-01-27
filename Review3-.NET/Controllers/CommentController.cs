@@ -11,7 +11,7 @@ namespace Review3_.NET.Controllers
 {
     public class CommentController : Controller
     {
-        private MyContext db = new MyContext();
+        //private MyContext db = new MyContext();
         public IActionResult Index()
         {
             return View();
