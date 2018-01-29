@@ -12,12 +12,12 @@
     foreach(var post in Model)
     {
         <div class="post">
-            <p>@Html.DisplayFor(modelItem=>post.User)</p>
+            <p>@Html.DisplayFor(modelItem=>post.User.UserName)</p>
             <p>@Html.DisplayFor(modelItem=>post.Body)</p>
             foreach(var comment in Post.Comments)
             {
                 <div class="comment">
-                    <p>@Html.DisplayFor(modelItem=>comment.User)</p>
+                    <p>@Html.DisplayFor(modelItem=>comment.User.UserName)??"Guest"</p>
                     <p>@Html.DisplayFor(modelItem=>comment.Body)</p>
                 </div>
             }
