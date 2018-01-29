@@ -30,12 +30,10 @@ namespace Review3_.NET.Controllers
 
             return View(_db.Posts.Where(x=>x.User.Id==currentUser.Id));
         }
-        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(Post post)
         {

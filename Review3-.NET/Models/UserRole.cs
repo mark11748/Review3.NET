@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Review3_.NET.Models
+namespace Review3.NET.Models
 {
-    [Table("Users")]
-    public class User: IdentityUser
+    public class UserRole : IdentityRole
     {
-        public string imgString { get; set; }
-        public 
-      
+        UserRole(string roleName):base(roleName)
+        {
+            
+        }
     }
 }
