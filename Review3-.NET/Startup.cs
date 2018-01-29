@@ -43,6 +43,7 @@ namespace Review3_.NET
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvc(routes =>
@@ -56,7 +57,7 @@ namespace Review3_.NET
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
 
             app.Run(async (context) =>

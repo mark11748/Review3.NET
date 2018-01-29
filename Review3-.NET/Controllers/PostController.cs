@@ -27,12 +27,30 @@ namespace Review3_.NET.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-
-            return View(_db.Posts.Where(x=>x.User.Id==currentUser.Id));
+            //get posts associated with user
+            IQueryable<Post> blogPosts = _db.Posts.Where(x => x.UserId == currentUser.Id);
+            foreach (Post post in blogPosts)
+            {
+                post.Comments = _db.Comments.Where(c => c.PostId == post.Id);
+                foreach (Comment comment in post.Comments)
+                {
+                    User commentAuthor = await _userManager.FindByIdAsync(comment.UserId);
+                    if (commentAuthor != null)
+                    { comment.User = commentAuthor; }
+                    else
+                    { 
+                        comment.User = new User { UserName = "Guest" , Email = "N/A" , ImgString = "http://media.culturemap.com/crop/06/03/320x240/Anonymous_Group_logo_this.jpg" }; 
+                    } 
+                }
+            }
+            return View();
         }
         public IActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            { return View(); }
+            else
+            { return RedirectToAction("Index"); }
         }
         [HttpPost]
         public async Task<IActionResult> Create(Post post)

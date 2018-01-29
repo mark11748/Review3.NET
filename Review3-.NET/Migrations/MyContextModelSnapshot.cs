@@ -173,6 +173,8 @@ namespace Review3.NET.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("ImgString");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -247,7 +249,7 @@ namespace Review3.NET.Migrations
 
             modelBuilder.Entity("Review3_.NET.Models.Comment", b =>
                 {
-                    b.HasOne("Review3_.NET.Models.Post", "Post")
+                    b.HasOne("Review3_.NET.Models.Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);

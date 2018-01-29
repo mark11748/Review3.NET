@@ -1,16 +1,17 @@
 ﻿@{
-    Layout="_Layout";
     ViewData["Title"] = "Index";
+    Layout ="_Layout";
 }
 
 @using System.Security.Claims
+@using Review3_.NET.Models
 @model IEnumerable<Review3_.NET.Models.Post>
 
 <h2>POSTS</h2>
 <hr/>
 @if(User.Identity.IsAuthenticated)
 {
-    using(Html.BeginForm("Create","Post",FormMethod.get)) 
+    using(Html.BeginForm("Create","Post",FormMethod.Get)) 
     { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
 }
 @if (Model.Any())
@@ -18,16 +19,16 @@
     foreach(var post in Model)
     {
         <div class="post">
-            <p>@Html.DisplayFor(modelItem=>post.User.UserName)</p>
-            <p>@Html.DisplayFor(modelItem=>post.Body)</p>
-            foreach(var comment in Post.Comments)
+            <p>@Html.DisplayFor(modelPost=>post.User.UserName)</p>
+            <p>@Html.DisplayFor(modelPost=>post.Body)</p>
+            foreach(Comment comment in Post.Comments)
             {
                 <div class="comment">
-                    <p>@Html.DisplayFor(modelItem=>comment.User.UserName)??"Guest"</p>
-                    <p>@Html.DisplayFor(modelItem=>comment.Body)</p>
+                    <p>@Html.DisplayFor(comment=>comment.User.UserName)</p>
+                    <p>@Html.DisplayFor(comment=>comment.Body)</p>
                 </div>
             }
-            using(Html.BeginForm("Create","Comment",FormMethod.get)) 
+            using(Html.BeginForm("Create","Comment",FormMethod.Get)) 
             { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
     }
         </div>

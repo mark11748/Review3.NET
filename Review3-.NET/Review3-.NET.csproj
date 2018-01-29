@@ -15,7 +15,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Migrations\" />
     <Folder Include="Views\Post\" />
-    <Folder Include="Views\Role\" />
   </ItemGroup>
 
   <ItemGroup>
