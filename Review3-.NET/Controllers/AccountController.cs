@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 using Review3_.NET.ViewModels;
 using Review3_.NET.Models;
@@ -41,6 +42,23 @@ namespace Review3_.NET.Controllers
             if (result.Succeeded)
             { return RedirectToAction("Index"); }
             else { return View(); }
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager
+                                                                        .PasswordSignInAsync
+                                                                            (model.UserName, model.Password, 
+                                                                             isPersistent: true, 
+                                                                             lockoutOnFailure: false);
+            if (result.Succeeded) { return RedirectToAction("Index"); }
+            else { return View(); } 
         }
     }
 }

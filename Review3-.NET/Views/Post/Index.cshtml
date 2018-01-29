@@ -1,0 +1,30 @@
+﻿@{
+    Layout="_Layout";
+    ViewData["Title"] = "Index";
+}
+
+@model IEnumerable<Review3_.NET.Models.Post>
+
+<h2>POSTS</h2>
+<hr/>
+@if (Model.Any())
+{
+    foreach(var post in Model)
+    {
+        <div class="post">
+            <p>@Html.DisplayFor(modelItem=>post.User)</p>
+            <p>@Html.DisplayFor(modelItem=>post.Body)</p>
+            foreach(var comment in Post.Comments)
+            {
+                <div class="comment">
+                    <p>@Html.DisplayFor(modelItem=>comment.User)</p>
+                    <p>@Html.DisplayFor(modelItem=>comment.Body)</p>
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <p>No posts have been made yet!</p>
+}

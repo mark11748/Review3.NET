@@ -14,6 +14,7 @@
     <Folder Include="Views\Account\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Views\Post\" />
   </ItemGroup>
 
   <ItemGroup>
