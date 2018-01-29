@@ -3,10 +3,16 @@
     ViewData["Title"] = "Index";
 }
 
+@using System.Security.Claims
 @model IEnumerable<Review3_.NET.Models.Post>
 
 <h2>POSTS</h2>
 <hr/>
+@if(User.Identity.IsAuthenticated)
+{
+    using(Html.BeginForm("Create","Post",FormMethod.get)) 
+    { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
+}
 @if (Model.Any())
 {
     foreach(var post in Model)
@@ -21,6 +27,9 @@
                     <p>@Html.DisplayFor(modelItem=>comment.Body)</p>
                 </div>
             }
+            using(Html.BeginForm("Create","Comment",FormMethod.get)) 
+            { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
+    }
         </div>
     }
 }
@@ -28,3 +37,4 @@ else
 {
     <p>No posts have been made yet!</p>
 }
+

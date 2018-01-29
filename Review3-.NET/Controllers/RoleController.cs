@@ -35,10 +35,7 @@ namespace Review3_.NET.Controllers
         {
             try
             {
-                _db.Roles.Add(new IdentityRole()
-                {
-                    Name = newRole
-                });
+                _db.Roles.Add(new UserRole(newRole));
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }

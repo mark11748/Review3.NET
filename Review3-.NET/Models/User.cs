@@ -8,8 +8,6 @@ namespace Review3_.NET.Models
     [Table("Users")]
     public class User: IdentityUser
     {
-        public string imgString { get; set; }
-        public 
-      
+        public string ImgString { get; set; }      
     }
 }
