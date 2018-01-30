@@ -44,4 +44,5 @@ namespace Review3_.NET.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index", "Post");
         }
+    }
 }
