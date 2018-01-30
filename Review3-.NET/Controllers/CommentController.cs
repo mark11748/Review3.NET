@@ -13,10 +13,35 @@ namespace Review3_.NET.Controllers
 {
     public class CommentController : Controller
     {
-        //private MyContext db = new MyContext();
-        public IActionResult Index()
+        private readonly MyContext _db;
+
+        public CommentController(MyContext db)
+        { _db = db; }
+
+        public IActionResult Create(int id)
         {
-            return View();
+            var model = new Comment();
+            model.PostId = id;
+            return View(model);
         }
-    }
+        [HttpPost]
+        public IActionResult Create(Comment comment)
+        {
+            _db.Comments.Add(comment);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Post");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var model = _db.Comments.FirstOrDefault(x => x.Id == id);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Delete(Comment scrap)
+        {
+            _db.Remove(scrap);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Post");
+        }
 }

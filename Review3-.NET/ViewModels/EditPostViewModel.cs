@@ -4,11 +4,12 @@ using Review3_.NET.Models;
 
 namespace Review3_.NET.ViewModels
 {
-    public class PostViewModel
+    public class EditPostViewModel
     {
+        [Required]
+        public string Author { get; set; }
         [Required]
         [Display(Name = "Message Body")]
         public string Body { get; set; }
-
     }
 }

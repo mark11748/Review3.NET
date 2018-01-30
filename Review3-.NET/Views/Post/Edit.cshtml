@@ -9,6 +9,7 @@
 @using(Html.BeginForm("Edit","Post",FormMethod.Post))
 {
     @Html.HiddenFor(model=>model.Id)
+
     @Html.LabelFor(model=>model.Body)
     @Html.TextBoxFor(model=>model.Body)
 

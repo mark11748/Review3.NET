@@ -12,9 +12,8 @@ namespace Review3_.NET.Models
         public int Id { get; set; }
         public string Author { get; set; }
         public string Body { get; set; }
+        [ForeignKey("Post")]
         public int PostId { get; set; }
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

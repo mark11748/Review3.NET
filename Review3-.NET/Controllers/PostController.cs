@@ -28,8 +28,10 @@ namespace Review3_.NET.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
+            var model = _db.Posts.Include(x=>x.Comments).ToList();
+
             //get posts associated with user
-            var blogPosts = _db.Posts.Include(p => p.Comments).Where(x => x.UserId == currentUser.Id).ToList();
+            //var blogPosts = _db.Posts.Include(p => p.Comments).Where(x => x.UserId == currentUser.Id).ToList();
             //foreach (Post post in blogPosts)
             //{
             //    post.Comments = _db.Comments.Where(c => c.PostId == post.Id).ToList();
@@ -45,7 +47,7 @@ namespace Review3_.NET.Controllers
             //        } 
             //    }
             //}
-            return View(blogPosts);
+            return View(model);
         }
         public IActionResult Create()
         {
@@ -60,7 +62,6 @@ namespace Review3_.NET.Controllers
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (await _userManager.FindByIdAsync(userId)!=null)
             {
-                post.UserId = userId;
                 _db.Posts.Add(post);
                 _db.SaveChanges();
             }
@@ -83,10 +84,11 @@ namespace Review3_.NET.Controllers
         [HttpPost]
         public IActionResult Edit( Post target )
         {
-            target.UserId = _db.Posts.Include(post => post.Id == target.Id).UserId;
-            _db.Entry(target).State=EntityState.Modified;
-            _db.SaveChanges();
+                _db.Entry(target).State = EntityState.Modified;
+                _db.SaveChanges();
+        
             return RedirectToAction("Index");
         }
+
     }
 }
