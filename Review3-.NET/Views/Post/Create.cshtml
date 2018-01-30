@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "CREATE-POST";
     Layout = "_Layout";
 }
 @model Review3_.NET.Models.Post
@@ -8,7 +8,7 @@
 <hr />
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Body)
+    @Html.LabelFor(model => model.Body)  
     @Html.EditorFor(model => model.Body)
     <input type="submit" value="Create" />
 }

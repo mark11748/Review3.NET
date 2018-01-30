@@ -8,6 +8,7 @@ namespace Review3_.NET.Models
     [Table("Users")]
     public class User: IdentityUser
     {
+        
         public string ImgString { get; set; }      
     }
 }

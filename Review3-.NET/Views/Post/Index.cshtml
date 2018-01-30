@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "POST LIST";
     Layout ="_Layout";
 }
 
@@ -11,7 +11,7 @@
 <hr/>
 @if(User.Identity.IsAuthenticated)
 {
-    using(Html.BeginForm("Create","Post",FormMethod.Get)) 
+    using(Html.BeginForm("Create" , "Post", FormMethod.Get)) 
     { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
 }
 @if (Model.Any())
@@ -19,18 +19,34 @@
     foreach(var post in Model)
     {
         <div class="post">
+            @if(User.Identity.IsAuthenticated)
+            {
+                 using(Html.BeginForm("Edit" , "Post", FormMethod.Get)) 
+                { 
+                    <input type="hidden" name="id" value="@post.Id"> 
+                    <input type="submit" class="btn btn-default" value="EDIT" />
+                }
+                using(Html.BeginForm("Delete","Post",FormMethod.Post)) 
+                { 
+                  <input type="hidden" name="id" value="@post.Id"> 
+                  <input type="submit" class="btn btn-default" value="DELETE POST"/> 
+                }
+            }
             <p>@Html.DisplayFor(modelPost=>post.User.UserName)</p>
             <p>@Html.DisplayFor(modelPost=>post.Body)</p>
-            foreach(Comment comment in Post.Comments)
+        @if(post.Comments.Any())
+        {
+            foreach(Comment comment in post.Comments)
             {
                 <div class="comment">
-                    <p>@Html.DisplayFor(comment=>comment.User.UserName)</p>
-                    <p>@Html.DisplayFor(comment=>comment.Body)</p>
+                    <p>@comment.Author</p>
+                    <p>@comment.Body</p>
                 </div>
             }
             using(Html.BeginForm("Create","Comment",FormMethod.Get)) 
             { <input type="submit" class="btn btn-default" value="COMPOSE" /> }
-    }
+        }
+    
         </div>
     }
 }

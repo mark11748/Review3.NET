@@ -127,6 +127,8 @@ namespace Review3.NET.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Author");
+
                     b.Property<string>("Body");
 
                     b.Property<int>("PostId");
@@ -146,6 +148,8 @@ namespace Review3.NET.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Author");
 
                     b.Property<string>("Body");
 

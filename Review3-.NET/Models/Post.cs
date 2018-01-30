@@ -16,7 +16,7 @@ namespace Review3_.NET.Models
         [ForeignKey("User")]
         public string UserId { get; set; }
         public virtual User User { get; set; }
-        public virtual IQueryable<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         //switched from icollection
     }
 }

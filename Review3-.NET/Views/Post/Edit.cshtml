@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "EDIT-POST";
+    Layout="_Layout";
+}
+<h2>EDIT POST</h2>
+<hr/>
+@model Review3_.NET.Models.Post
+
+@using(Html.BeginForm("Edit","Post",FormMethod.Post))
+{
+    @Html.HiddenFor(model=>model.Id)
+    @Html.LabelFor(model=>model.Body)
+    @Html.TextBoxFor(model=>model.Body)
+
+    <input type="submit" value="SAVE CHANGES" />
+}
