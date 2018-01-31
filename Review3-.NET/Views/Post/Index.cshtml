@@ -5,6 +5,24 @@
 
 @using System.Security.Claims
 @using Review3_.NET.Models
+<script>
+$(document).ready(function(){
+    $('input.rmvComment').click(function () {
+      var parentElement = $(this).closest("div.comment");
+      var dat = $(this).data("cid");
+    
+      $.ajax({
+        type: 'GET',
+        dataType: 'html',
+        data:{ id: dat },
+        url: "@Url.Action("Delete","Comment")",  
+        success: function (result) {
+            parentElement.html(result);  
+        } 
+      });
+    });
+});
+</script>  
 
 
 @model IEnumerable<Review3_.NET.Models.Post>
@@ -39,21 +57,20 @@
                             <input type="submit" class="btn btn-default" value="DELETE POST"/> 
                         }
                     }
-                    <p>@Html.DisplayFor(modelPost=>post.Id)</p>
                     <p>@Html.DisplayFor(modelPost=>post.Body)</p>
       
                     <div class="show-comments">
                         @foreach(var comment in post.Comments)
                         {
-                            <div style="border: solid 2px black;margin:2%">
-                            <p style="color:red;margin-left:20px;">@Html.DisplayFor(PostComments=>comment.Author)</p>
-                            <p style="color:red;margin-left:30px;">@Html.DisplayFor(PostComments=>comment.Body)</p>
-                            @using(Html.BeginForm("Delete","Comment",FormMethod.Get )) 
-                            { 
-                                <input type="hidden" name="id" value="@comment.Id"> 
-                                <input type="submit" class="btn btn-default" value="Remove" style="margin-left:5%" /> 
-                            }
-                            </div>
+                            <div class="comment" style="border: solid 2px black;margin:2%">
+                                <p style="color:red;margin-left:20px;">@Html.DisplayFor(PostComments=>comment.Author)</p>
+                                <p style="color:red;margin-left:30px;">@Html.DisplayFor(PostComments=>comment.Body)</p>
+                                @using(Html.BeginForm("Delete","Comment",FormMethod.Get )) 
+                                { 
+                                    <input type="hidden" name="id" value="@comment.Id"> 
+                                    <input type="button" class="btn btn-default rmvComment" value="Remove" style="margin-left:5%" data-cid="@comment.Id" /> 
+                                }
+                            </div>  
                         }
                     </div>
 
